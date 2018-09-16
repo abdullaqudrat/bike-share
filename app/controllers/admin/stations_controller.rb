@@ -2,7 +2,7 @@ class Admin::StationsController < Admin::BaseController
   # before_action :set_station, only: [:show, :update, :edit, :create, :new]
 
   def index
-    @stations = Station.all
+    @stations = Station.paginate(:page => params[:page], :per_page => 30)
   end
 
   def show
@@ -16,10 +16,10 @@ class Admin::StationsController < Admin::BaseController
   def create
     @station = Station.new(station_params)
     if @station.save
-      flash[:notice] = "#{@station.name} Created."
+      flash[:notice] = "New Station added!"
       redirect_to stations_path
     else
-      flash[:notice] = "Error - Could not create new station"
+      flash[:notice] = "Station was not created."
       redirect_to new_admin_station_path
     end
   end

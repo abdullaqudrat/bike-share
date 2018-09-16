@@ -8,17 +8,17 @@ describe "Admin Stations Index" do
       station2 = create(:station)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
-      visit admin_stations_path
+      visit stations_path
 
-      expect(page).to have_content("Add Station")
+      expect(page).to have_content("Create New Station")
 
       within("#station-#{station1.id}") do
         expect(page).to have_content(station1.name)
         expect(page).to have_content(station1.dock_count)
         expect(page).to have_content(station1.city)
         expect(page).to have_content(station1.installation_date.strftime('%m/%d/%Y'))
-        expect(page).to have_content("Edit")
-        expect(page).to have_content("Delete")
+        expect(page).to have_button("Edit")
+        expect(page).to have_button("Delete")
       end
 
       within("#station-#{station2.id}") do
@@ -26,8 +26,8 @@ describe "Admin Stations Index" do
         expect(page).to have_content(station2.dock_count)
         expect(page).to have_content(station2.city)
         expect(page).to have_content(station2.installation_date.strftime('%m/%d/%Y'))
-        expect(page).to have_content("Edit")
-        expect(page).to have_content("Delete")
+        expect(page).to have_button("Edit")
+        expect(page).to have_button("Delete")
       end
     end
     it 'allows an admin to create a new station' do
@@ -46,7 +46,7 @@ describe "Admin Stations Index" do
       expect(page).to have_content("New Station")
       expect(page).to have_content("New City")
       expect(page).to have_content('09/12/2018')
-      expect(page).to have_content('New Station Created')
+      expect(page).to have_content("New Station added!")
     end
     it 'does not allow negative dock count' do
       admin = create(:user, role: 1)
@@ -60,7 +60,7 @@ describe "Admin Stations Index" do
 
       click_on "Create Station"
 
-      expect(page).to have_content("Error - Could not create new station")
+      expect(page).to have_content("Station was not created.")
       expect(current_path).to eq(new_admin_station_path)
     end
   end
