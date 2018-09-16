@@ -16,7 +16,7 @@ class Admin::StationsController < Admin::BaseController
     @station = Station.new(station_params)
     if @station.save
       flash[:notice] = "New Station added!"
-      redirect_to stations_path
+      redirect_to station_path(@station)
     else
       flash[:notice] = "Station was not created."
       redirect_to new_admin_station_path

@@ -1,9 +1,5 @@
 <h1><%= @station.name %></h1>
 
-<% if current_admin? %>
-  <%= link_to 'Create New Station', new_admin_station_path, class:'btn btn-secondary' %>
-<% end %>
-
 <section class='show-main'>
   <div>Dock Count: <%= @station.dock_count %></div>
   <div>City: <%= @station.city %></div>
@@ -23,6 +19,6 @@
 </section>
 
 <% if current_admin? %>
-  <%= button_to 'Edit', edit_admin_station_path(@station), method: :get, class:'btn btn-success show-edit-button' %>
-  <%= button_to 'Delete', admin_station_path(@station), method: :delete, data: {confirm: "Really want to delete this station?"}, class:'btn btn-danger' %>
+  <%= button_to 'Edit', edit_admin_station_path(@station), class:'btn btn-success show-edit-button' %>
+  <%= button_to 'Delete', station_path(@station), method: :delete, data: {confirm: "Really want to delete this station?"}, class:'btn btn-danger' %>
 <% end %>
