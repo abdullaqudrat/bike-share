@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create, :edit, :update]
-  resources :stations, only: [:index, :show]
+  resources :stations, only: [:index, :show, :destroy]
   resources :trips, only: [:index, :show]
   resources :conditions, only: [:index, :show, :destroy]
   resources :accessories, only: [:show]

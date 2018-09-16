@@ -8,6 +8,13 @@ class StationsController < ApplicationController
     @station = Station.friendly.find(params[:id])
   end
 
+  def destroy
+    @station = Station.friendly.find(params[:id])
+    @station.destroy
+    flash[:notice] = "Station deleted."
+    redirect_to stations_path
+  end
+
   def dashboard
     @stations = Station.all
     @stations_count = @stations.total_count
